@@ -1,31 +1,65 @@
-import React, { useState } from 'react'
+import React, { useState , useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { UserDataContext } from '../context/UserContext'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const UseLogin = () => {
   const [email, setEmail] = useState('')
-  const [password, setpassword] = useState('')
+  const [password, setpassword] = useState('') 
   const[userData, setUserData] = useState({})
 
-  const submitHandler = (e) => {
-     e.preventDefault();
-    setUserData({
-      email: email,
-      password: password
-    })
-        console.log(userData);
-     setEmail('')
-     setpassword('')
-  }
+  const {setUser} = useContext(UserDataContext)
+  const navigate = useNavigate()
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const userData = {
+      email: email,
+      password: password,
+    };
+  
+    console.log('Login Request:', userData);
+  
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/user/login`,
+        userData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+  
+      if (response.status === 200) {
+        const data = response.data;
+        setUser(data.user);
+        localStorage.setItem('token', data.token);
+        navigate('/home');
+        setEmail('');
+        setpassword('');
+      }
+    } catch (error) {
+      if (error.response) {
+        console.error('Server responded with:', error.response.data);
+        console.error('Status:', error.response.status);
+      } else if (error.request) {
+        console.error('No response received:', error.request);
+      } else {
+        console.error('Error in setting up request:', error.message);
+      }
+    }
+  };
+  
+  
   return (
     <div className='p-7 h-screen flex flex-col justify-between'>
       <div>
       <img className='w-16 mb-5' src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Uber_logo_2018.svg/1200px-Uber_logo_2018.svg.png?20180914002846'></img>
 
-<form onSubmit={(e) => {
-  submitHandler(e)
-}}>
-    <h3 className='txt-lg font-medium mb-2'>What's your email</h3>
+<form onSubmit={submitHandler}>
+    <h3 className='text-lg font-medium mb-2'>What's your email</h3>
     <input
      required 
      value={email}
@@ -60,4 +94,4 @@ const UseLogin = () => {
   )
 }
 
-export default UseLogin
+export default UseLogin;
