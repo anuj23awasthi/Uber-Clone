@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const CaptainSignup = () => {
-   const [email,setEmail] = useState('')
-    const [password,setpassword] = useState('')
-    const[firstName, setFirstName] = useState('')
-    const[lastName, setlastName] = useState('')
-    const [UserData, setUserData] = useState({})
+   const [email,setEmail] = useState('');
+    const [password,setpassword] = useState('');
+    const[firstName, setFirstName] = useState('');
+    const[lastName, setlastName] = useState('');
+    const [UserData, setUserData] = useState({});
   
     const submitHandler = (e) => {
       e.preventDefault();
@@ -91,3 +91,4 @@ submitHandler(e)
 }
 
 export default CaptainSignup
+
