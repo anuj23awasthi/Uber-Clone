@@ -10,48 +10,32 @@ const UseLogin = () => {
   const[userData, setUserData] = useState({})
 
   const {setUser} = useContext(UserDataContext)
-  const navigate = useNavigate()
+  const navigate = useNavigate("/")
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const userData = {
+    const userData = { 
       email: email,
       password: password,
     };
   
-    console.log('Login Request:', userData);
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/user/login`,userData
   
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/user/login`,
-        userData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+    )
   
       if (response.status === 200) {
         const data = response.data;
         setUser(data.user);
         localStorage.setItem('token', data.token);
         navigate('/home');
-        setEmail('');
-        setpassword('');
+        
       }
-    } catch (error) {
-      if (error.response) {
-        console.error('Server responded with:', error.response.data);
-        console.error('Status:', error.response.status);
-      } else if (error.request) {
-        console.error('No response received:', error.request);
-      } else {
-        console.error('Error in setting up request:', error.message);
-      }
+
+      setEmail('');
+      setpassword('');
+
     }
-  };
-  
   
   return (
     <div className='p-7 h-screen flex flex-col justify-between'>

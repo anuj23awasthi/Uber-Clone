@@ -33,7 +33,7 @@ const CaptainSignup = () => {
        }
     };
  
-    try {
+  
        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captain/register`, captainData);
  
        if (response.status === 200) {
@@ -43,10 +43,8 @@ const CaptainSignup = () => {
           navigate('/captain-home');
           resetForm();
        }
-    } catch (error) {
-       console.error('Error registering captain:', error.response ? error.response.data : error.message);
-    }
- };
+  };
+
  
 
   const resetForm = () => {
@@ -172,5 +170,6 @@ const CaptainSignup = () => {
     </div>
   );
 };
+
 
 export default CaptainSignup;

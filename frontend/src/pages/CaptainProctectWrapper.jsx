@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CaptainDataContext } from '../context/CaptainContext'; // Corrected import path
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 const CaptainProtectWrapper = ({ children }) => {
@@ -39,5 +40,9 @@ const CaptainProtectWrapper = ({ children }) => {
 
   return <>{children}</>;
 };
+CaptainProtectWrapper.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 export default CaptainProtectWrapper;
+
