@@ -22,14 +22,17 @@ const CaptainSignup = () => {
     e.preventDefault();
  
     const captainData = {
-       fullname: { firstname: firstName, lastname: lastName },
+       fullname: { 
+       firstname: firstName, 
+       lastname: lastName 
+      },
        email: email,
        password: password,
        vehicle: {
           color: vehicleColor,
           plate: vehiclePlate,
           capacity: vehicleCapacity,
-          vehicletype: vehicleType
+          vehicleType: vehicleType
        }
     };
  
@@ -41,13 +44,8 @@ const CaptainSignup = () => {
           setCaptain(data.captain);
           localStorage.setItem('token', data.token);
           navigate('/captain-home');
-          resetForm();
        }
-  };
 
- 
-
-  const resetForm = () => {
     setEmail('');
     setFirstName('');
     setLastName('');
@@ -63,7 +61,8 @@ const CaptainSignup = () => {
       <div>
         <img className='w-20 mb-2' src='https://www.svgrepo.com/show/505031/uber-driver.svg' alt='Uber Driver' />
 
-        <form onSubmit={submitHandler}>
+        <form onSubmit={(e) => {submitHandler(e)}}>
+
           <h3 className='txt-base w-full font-medium mb-2'>What's our Captain's name</h3>
           <div className='flex gap-4 mb-6'>
             <input
@@ -72,7 +71,7 @@ const CaptainSignup = () => {
               type="text"
               placeholder='First-Name'
               value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              onChange={(e) => {setFirstName(e.target.value)}}
             />
             <input
               required
@@ -80,7 +79,7 @@ const CaptainSignup = () => {
               type="text"
               placeholder='Last-Name'
               value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              onChange={(e) => {setLastName(e.target.value)}}
             />
           </div>
 
@@ -98,10 +97,10 @@ const CaptainSignup = () => {
           <input
             className='bg-[#eeeeee] mb-6 rounded px-4 py-2 border w-full text-base placeholder:text-sm'
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) =>{ setPassword(e.target.value)}}
             required
             type="password"
-            placeholder='Enter your Password'
+            placeholder='Password'
           />
 
           <h3 className='text-lg font-medium mb-2'>Vehicle Information</h3>
@@ -112,7 +111,7 @@ const CaptainSignup = () => {
               type="text"
               placeholder='Vehicle Color'
               value={vehicleColor}
-              onChange={(e) => setVehicleColor(e.target.value)}
+              onChange={(e) =>{ setVehicleColor(e.target.value)}}
             />
             <input
               required
@@ -120,7 +119,7 @@ const CaptainSignup = () => {
               type="text"
               placeholder='Vehicle Plate'
               value={vehiclePlate}
-              onChange={(e) => setVehiclePlate(e.target.value)}
+              onChange={(e) => {setVehiclePlate(e.target.value)}}
             />
           </div>
 
@@ -169,7 +168,7 @@ const CaptainSignup = () => {
       </div>
     </div>
   );
-};
+}
 
 
 export default CaptainSignup;

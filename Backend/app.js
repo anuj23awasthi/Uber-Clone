@@ -19,12 +19,12 @@ app.use(cookieParser());
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
-app.post('/captain/register', (req, res) => {
-    console.log(req.body); 
-    res.send('Captain registered');});
-app.post('/captain/login', (req, res) => {
-        console.log('Request Body:', req.body); 
-      });
+// app.post('/captain/register', (req, res) => {
+//     // console.log(req.body); 
+//     res.send('Captain registered');});
+// app.post('/captain/login', (req, res) => {
+//         console.log('Request Body:', req.body); 
+//       });
       
 app.use('/captain', captainRoutes);  
 

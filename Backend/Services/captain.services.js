@@ -1,4 +1,12 @@
 const captainModel = require('../models/captain.model');
+const Captain = require('../models/captain.model');
+
+module.exports.createCaptain = async (data) => {
+    const newCaptain = new Captain(data);
+    await newCaptain.save();
+    return newCaptain;
+};
+
 
 module.exports.createCaptain = async ({ firstname, lastname, email, password, color, plate, capacity, vehicleType }) => {
     if (!firstname || !lastname || !email || !password || !color || !plate || !capacity || !vehicleType) {
