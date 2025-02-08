@@ -17,6 +17,8 @@ const LocationSearchPanel = (props) => {
             {
                 locations.map(function (elem) {
                     return <div onClick={() => {
+                locations.map(function (elem, idx) {
+                    return <div  key = {idx} onClick={() => {
                         props.setvehiclePanel(true)
                         props.setpanelOpen(false)
                     }}

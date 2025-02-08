@@ -9,7 +9,8 @@ import Home from "./pages/Home";
 import UserProtectWrapper from "./pages/UserProtectWrapper";
 import UserLogout from "./pages/UserLogout";
 import CaptainHome from "./pages/CaptainHome";
-import CaptainProtectWrapper from "./pages/CaptainProctectWrapper";
+import CaptainProtectWrapper from "./pages/CaptainProtectWrapper";
+import Riding from "./pages/Riding"; // Importing the Riding component
 
 const App = () => {
   return (
@@ -28,7 +29,6 @@ const App = () => {
             </UserProtectWrapper>
           }
         />
-
         <Route
           path="/user/logout"
           element={
@@ -45,6 +45,7 @@ const App = () => {
             </CaptainProtectWrapper>
           }
         />
+        <Route path="/riding" element={<Riding />} /> {/* Added Riding route */}
       </Routes>
     </div>
   );
